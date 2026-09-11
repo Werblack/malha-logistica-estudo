@@ -1,0 +1,320 @@
+{
+ "P082": {
+  "lat": -23.5302788,
+  "lon": -46.7282708,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P110": {
+  "lat": -23.5049435,
+  "lon": -47.4604376,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P237": {
+  "lat": -23.82187,
+  "lon": -46.04242,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P178": {
+  "lat": -23.6233154,
+  "lon": -45.4084965,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P096": {
+  "lat": -22.8905823,
+  "lon": -47.0462132,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P003": {
+  "lat": -23.1928254,
+  "lon": -46.9028245,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P007": {
+  "lat": -23.5060747,
+  "lon": -46.6426697,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P011": {
+  "lat": -23.5632188,
+  "lon": -46.6542596,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P012": {
+  "lat": -23.6606684,
+  "lon": -46.7078504,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P014": {
+  "lat": -23.5315012,
+  "lon": -46.6363134,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P015": {
+  "lat": -23.5610006,
+  "lon": -46.6832647,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P017": {
+  "lat": -23.5920041,
+  "lon": -46.6365035,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P018": {
+  "lat": -23.5392233,
+  "lon": -46.4549258,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P019": {
+  "lat": -23.5293633,
+  "lon": -46.5492213,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P020": {
+  "lat": -23.4712569,
+  "lon": -46.530413,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P076": {
+  "lat": -23.5347592,
+  "lon": -46.7678337,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P085": {
+  "lat": -23.6265925,
+  "lon": -46.6910535,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P086": {
+  "lat": -23.6185909,
+  "lon": -46.7710396,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P088": {
+  "lat": -23.187344,
+  "lon": -45.8846005,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P089": {
+  "lat": -21.1781489,
+  "lon": -47.8101061,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P092": {
+  "lat": -23.9455132,
+  "lon": -46.326557,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P099": {
+  "lat": -22.3391569,
+  "lon": -49.0678061,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P105": {
+  "lat": -23.5464088,
+  "lon": -46.5880447,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P114": {
+  "lat": -20.8271017,
+  "lon": -49.3586633,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P115": {
+  "lat": -22.1161167,
+  "lon": -51.4003787,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P119": {
+  "lat": -23.706608,
+  "lon": -46.5534587,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P120": {
+  "lat": -21.7651315,
+  "lon": -48.1665162,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P121": {
+  "lat": -23.0297546,
+  "lon": -45.5579283,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P137": {
+  "lat": -22.7156561,
+  "lon": -47.6464212,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P145": {
+  "lat": -23.5922558,
+  "lon": -46.8303267,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P150": {
+  "lat": -20.5335367,
+  "lon": -47.3894517,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P191": {
+  "lat": -23.509508,
+  "lon": -46.1936625,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P225": {
+  "lat": -23.0882364,
+  "lon": -47.198705,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P241": {
+  "lat": -23.3058832,
+  "lon": -45.9645022,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P261": {
+  "lat": -22.8237957,
+  "lon": -47.2670408,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P286": {
+  "lat": -23.5152335,
+  "lon": -46.6668377,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P094": {
+  "lat": -23.4993072,
+  "lon": -46.8481109,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P293": {
+  "lat": -22.73919,
+  "lon": -45.59199,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P276": {
+  "lat": -24.010041,
+  "lon": -46.417739,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P283": {
+  "lat": -23.6866221,
+  "lon": -46.6255519,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P125": {
+  "lat": -23.5152335,
+  "lon": -46.6668377,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P016": {
+  "lat": -23.5974096,
+  "lon": -46.5412187,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P302": {
+  "lat": -23.6060947,
+  "lon": -46.7538824,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P312": {
+  "lat": -21.7847829,
+  "lon": -48.1602798,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P313": {
+  "lat": -23.6968813,
+  "lon": -46.5534771,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P310": {
+  "lat": -23.6189773,
+  "lon": -46.6761248,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "P319": {
+  "lat": -23.5347592,
+  "lon": -46.7678337,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "OGEA": {
+  "lat": -23.4652097,
+  "lon": -46.830228,
+  "fonte": "awesomeapi",
+  "confianca": "alta"
+ },
+ "BAIRRO:Campo Belo": {
+  "lat": -23.6299339,
+  "lon": -46.670417,
+  "fonte": "nominatim_texto",
+  "confianca": "alta"
+ },
+ "BAIRRO:Casa Verde": {
+  "lat": -23.5059269,
+  "lon": -46.6561379,
+  "fonte": "nominatim_texto",
+  "confianca": "alta"
+ },
+ "BAIRRO:Itaquera": {
+  "lat": -23.5422994,
+  "lon": -46.4712065,
+  "fonte": "nominatim_texto",
+  "confianca": "alta"
+ },
+ "BAIRRO:Vila Prudente": {
+  "lat": -23.5846609,
+  "lon": -46.5833457,
+  "fonte": "nominatim_texto",
+  "confianca": "alta"
+ },
+ "BAIRRO:Vila Romana": {
+  "lat": -23.5287714,
+  "lon": -46.7037412,
+  "fonte": "nominatim_texto",
+  "confianca": "alta"
+ }
+}

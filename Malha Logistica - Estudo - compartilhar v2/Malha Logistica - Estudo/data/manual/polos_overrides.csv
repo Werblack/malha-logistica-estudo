@@ -1,0 +1,5 @@
+codigo_polo,lat,lon,legado_de,excluir,observacao
+P076,,,P319,1,Mesma rua/CEP do P319 (Osasco) no cadastro de prestadores
+P120,,,P312,1,Araraquara: TEMPLATE usa P120 como origem e P312 como responsável
+P119,,,P313,1,SBC: TEMPLATE usa P119 como origem e P313 como responsável; CEP 09725 igual ao P313
+P286,,,,0,Perus LT cadastrado com o mesmo CEP do P125 (Barra Funda) - endereço provável provisório
