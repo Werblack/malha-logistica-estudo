@@ -7,7 +7,8 @@ import pandas as pd
 from malha import config
 from malha.geo import ibge
 
-TABELAS = ["os", "template", "municipios", "polos", "dist_polo_mun", "cmu_polo", "preco_ogea", "tec_ativos"]
+TABELAS = ["os", "template", "municipios", "polos", "dist_polo_mun", "cmu_polo", "preco_ogea", "tec_ativos",
+           "locais", "dist_polo_local"]
 
 
 @dataclass
@@ -20,6 +21,8 @@ class Dados:
     cmu_polo: pd.DataFrame
     preco_ogea: pd.DataFrame
     tec_ativos: pd.DataFrame
+    locais: pd.DataFrame
+    dist_local: pd.DataFrame
     qualidade: dict
     malha: dict
 
@@ -33,6 +36,7 @@ def load() -> Dados:
     return Dados(
         os=t["os"], template=t["template"], municipios=t["municipios"], polos=t["polos"],
         dist=t["dist_polo_mun"], cmu_polo=t["cmu_polo"], preco_ogea=t["preco_ogea"], tec_ativos=t["tec_ativos"],
+        locais=t["locais"], dist_local=t["dist_polo_local"],
         qualidade=json.loads((p / "qualidade.json").read_text(encoding="utf-8")),
         malha=ibge.load_malha(),
     )

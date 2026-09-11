@@ -24,8 +24,14 @@ def _local(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def polos_sp(prest: pd.DataFrame) -> pd.DataFrame:
-    """Um registro por polo 'Pnnn' cadastrado em SP."""
-    df = prest[prest["Estado"].isin(["São Paulo"])].copy()
+    """Polos ativos em SP: `Status == "Habilitado"` e `Nome` contém "Polo" (regra de negócio).
+
+    Matrizes/administrativos e prestadores desabilitados ficam de fora. Só entram os que também
+    têm código 'Pnnn' no nome (é esse código que casa com a coluna `Polo` da BD).
+    """
+    mask = (prest["Estado"].eq("São Paulo") & prest["Status"].eq("Habilitado")
+            & prest["Nome"].str.contains("polo", case=False, na=False))
+    df = prest[mask].copy()
     codigo = df["Nome"].map(parse_polo_code)
     df = df[codigo.notna()]
     out = _local(df)

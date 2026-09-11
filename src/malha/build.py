@@ -11,7 +11,7 @@ import logging
 import numpy as np
 import pandas as pd
 
-from malha import config
+from malha import config, locais as locais_mod
 from malha.geo import ibge
 from malha.geo.distance import distance_matrix
 from malha.geo.geocode import Geocoder
@@ -94,7 +94,7 @@ def _records(df: pd.DataFrame) -> list:
     return json.loads(df.to_json(orient="records", force_ascii=False))
 
 
-def relatorio_qualidade(os_, template, mun, polos, cmu_polo, preco_ogea) -> dict:
+def relatorio_qualidade(os_, template, mun, polos, cmu_polo, preco_ogea, locs=None) -> dict:
     p = os_[os_["transportadora"].eq("POLO")]
     o = os_[os_["transportadora"].eq("OGEA")]
 
@@ -128,6 +128,8 @@ def relatorio_qualidade(os_, template, mun, polos, cmu_polo, preco_ogea) -> dict
                                                        ["codigo_polo", "polo_nome", "tec_ativos", "tec_distintos_bd"]]),
         "polos_cadastro": _vc(polos["status_bd"]),
         "geocode": _records(polos[["codigo_polo", "polo_nome", "status_bd", "coord_fonte", "coord_confianca"]]),
+        "locais_capital": _records(locs.loc[locs["capital_subnode"], ["local_id", "nome_local", "coord_fonte", "coord_confianca"]])
+                         if locs is not None else [],
     }
 
 
@@ -152,6 +154,8 @@ def main(argv=None):
                          + nao.to_string())
     os_["cod_ibge"] = os_["cod_ibge"].astype("int64")
     os_["match_municipio"] = os_["match_municipio"].astype("string")
+    os_["local_id"] = locais_mod.local_id(os_["cod_ibge"], os_["distrito_capital"],
+                                         cep=os_["cep"], e_ogea=os_["transportadora"].eq("OGEA"))
 
     log.info("Lendo TEMPLATE, CMU e cadastro de prestadores")
     template = _as_string(load_template(config.RAW_XLSX, resolver))
@@ -165,10 +169,18 @@ def main(argv=None):
     polos = build_polos(prest, os_, tec_ativos, mun, polys, resolver, geocoder)
     dist = distance_matrix(polos[["codigo_polo", "lat", "lon"]], mun[["cod_ibge", "lat", "lon"]])
 
-    qualidade = relatorio_qualidade(os_, template, mun, polos, cmu_polo, preco_ogea)
+    log.info("Montando locais (município, com São Paulo dividida em bairro) e geocodificando bairros")
+    bbox_sp = polys[config.COD_IBGE_SAO_PAULO].bounds
+    locs = locais_mod.build_locais(mun, geocoder, bbox=bbox_sp)
+    geocoder.save()
+    dist_local = distance_matrix(polos[["codigo_polo", "lat", "lon"]], locs[["local_id", "lat", "lon"]],
+                                 dest_id="local_id")
+
+    qualidade = relatorio_qualidade(os_, template, mun, polos, cmu_polo, preco_ogea, locs)
     out = config.PROCESSED
     tabelas = {"os": os_, "template": template, "municipios": mun, "polos": polos, "dist_polo_mun": dist,
-               "cmu_polo": cmu_polo, "preco_ogea": preco_ogea, "tec_ativos": tec_ativos}
+               "cmu_polo": cmu_polo, "preco_ogea": preco_ogea, "tec_ativos": tec_ativos,
+               "locais": locs, "dist_polo_local": dist_local}
     for nome, df in tabelas.items():
         df.to_parquet(out / f"{nome}.parquet", index=False)
     (out / "qualidade.json").write_text(json.dumps(qualidade, ensure_ascii=False, indent=1, default=str),

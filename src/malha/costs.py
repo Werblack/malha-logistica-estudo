@@ -1,14 +1,45 @@
-"""Modelo de custo e rateio (faceta "rateio de custo fixo").
+"""Modelo de custo e dimensionamento de técnicos.
 
-Polo ativo: custo observado (CMU × volume de jul/26) + custo de cada técnico ADICIONAL.
-Polo dormente/novo: custo de abertura (input) + custo por técnico.
-Logo, absorver volume dilui o custo atual do polo (CMU cai) até o degrau de uma nova contratação.
+Regra de negócio (Especificação de Refatoração): técnico novo rende por produtividade da região
+(Capital/Grande SP: mais denso, mais OS/dia; Interior: menos denso) — não pela meta única de antes.
+Técnicos sugeridos = teto(volume absorvido / produtividade mensal da região do polo).
+Novo CMU = (custo atual do polo + técnicos sugeridos × custo/técnico) / (volume base + volume absorvido).
+Sem aviso de prejuízo: o número sai como está, a leitura é gerencial.
 """
 import math
 
 import numpy as np
 import pandas as pd
 
+DIAS_UTEIS_MES = 22  # convenção de calendário (≈22 dias úteis/mês), não um dado da planilha
+
+
+def produtividade_mensal(os_por_dia: float, dias_uteis_mes: int = DIAS_UTEIS_MES) -> float:
+    return float(os_por_dia) * dias_uteis_mes
+
+
+def tecnicos_sugeridos(volume_absorvido, produtividade_mensal):
+    """Teto(volume absorvido / produtividade mensal). Aceita escalar ou array (produtividade pode variar por linha)."""
+    v = np.asarray(volume_absorvido, dtype=float)
+    prod = np.asarray(produtividade_mensal, dtype=float)
+    with np.errstate(divide="ignore", invalid="ignore"):
+        t = np.ceil(v / prod - 1e-9)
+    return np.where((prod > 0) & (v > 0), t, 0.0)
+
+
+def novo_custo_polo(custo_atual, tecnicos_sugeridos, custo_tecnico: float):
+    return np.asarray(custo_atual, dtype=float) + np.asarray(tecnicos_sugeridos, dtype=float) * custo_tecnico
+
+
+def novo_cmu(custo_novo, volume_base, volume_absorvido):
+    total = np.asarray(volume_base, dtype=float) + np.asarray(volume_absorvido, dtype=float)
+    custo_novo = np.asarray(custo_novo, dtype=float)
+    return np.where(total > 0, custo_novo / np.where(total > 0, total, 1.0), np.nan)
+
+
+# --------------------------------------------------------------------------------------------------
+# Mantido para o motor MILP (src/malha/optimize.py), que continua no repositório como ferramenta
+# avançada/offline — só não é mais chamado pela tela principal. Não duplica regra: é outro modelo.
 
 def capacidade_atual(meta: float, volume_atual: float, tec_atuais: float, usar_prod_observada: bool = True) -> float:
     """OS/mês que a equipe ATUAL do polo consegue fazer.

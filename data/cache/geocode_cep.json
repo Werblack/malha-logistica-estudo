@@ -286,5 +286,35 @@
   "lon": -46.830228,
   "fonte": "awesomeapi",
   "confianca": "alta"
+ },
+ "BAIRRO:Campo Belo": {
+  "lat": -23.6299339,
+  "lon": -46.670417,
+  "fonte": "nominatim_texto",
+  "confianca": "alta"
+ },
+ "BAIRRO:Casa Verde": {
+  "lat": -23.5059269,
+  "lon": -46.6561379,
+  "fonte": "nominatim_texto",
+  "confianca": "alta"
+ },
+ "BAIRRO:Itaquera": {
+  "lat": -23.5422994,
+  "lon": -46.4712065,
+  "fonte": "nominatim_texto",
+  "confianca": "alta"
+ },
+ "BAIRRO:Vila Prudente": {
+  "lat": -23.5846609,
+  "lon": -46.5833457,
+  "fonte": "nominatim_texto",
+  "confianca": "alta"
+ },
+ "BAIRRO:Vila Romana": {
+  "lat": -23.5287714,
+  "lon": -46.7037412,
+  "fonte": "nominatim_texto",
+  "confianca": "alta"
  }
 }

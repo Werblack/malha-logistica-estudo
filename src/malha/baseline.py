@@ -87,10 +87,12 @@ def defaults(d: Dados, kpis: pd.DataFrame | None = None) -> dict:
             "origem": "dado: mediana de OS/técnico ativo/mês dos polos em jul/26"},
         "custo_tecnico": {
             "valor": round(float(at["custo_por_tec"].median()), 2),
-            "origem": "dado: mediana de (CMU × volume) / técnicos ativos — custo total observado por técnico/mês"},
+            "origem": "dado: mediana de (CMU x volume) / técnicos ativos (custo total observado por técnico/mês)"},
         "sla_alvo": {
             "valor": round(float(polo_os["no_prazo"].mean()), 4),
             "origem": "dado: % de OS no prazo dos polos em jul/26"},
         "custo_abrir": {"valor": 0.0, "origem": "input: custo fixo extra para abrir polo dormente/novo (sem dado)"},
         "custo_km": {"valor": 0.0, "origem": "input: R$ por OS·km de deslocamento (sem dado)"},
+        "os_dia_gsp": {"valor": 6.0, "origem": "input: regra de negócio (produtividade Capital/Grande SP, OS/técnico/dia)"},
+        "os_dia_interior": {"valor": 3.5, "origem": "input: regra de negócio (produtividade Interior, 3 a 4 OS/técnico/dia)"},
     }

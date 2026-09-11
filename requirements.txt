@@ -13,3 +13,4 @@ scipy>=1.14
 pulp>=3.0,<4
 highspy>=1.10
 pytest>=8
+pywebview>=6.2   # janela desktop nativa (desktop/main.py) — usa Edge WebView2 no Windows

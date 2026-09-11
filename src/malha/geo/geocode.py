@@ -57,6 +57,25 @@ def _nominatim(cep, endereco=None, numero=None, cidade=None, **_):
     return None
 
 
+def _nominatim_texto(query: str, viewbox: tuple | None = None):
+    """Busca livre (sem endereço estruturado) — só para os bairros da capital, geocodificados pelo nome.
+
+    `viewbox` (min_lon, min_lat, max_lon, max_lat) restringe a busca (bounded=1) para não pegar
+    homônimo em outro município — sem isso "Vila Romana" (bairro de SP) caiu no interior do estado.
+    """
+    time.sleep(1.1)  # política Nominatim: máx 1 req/s
+    params = {"q": query, "format": "json", "limit": 1, "countrycodes": "br"}
+    if viewbox is not None:
+        min_lon, min_lat, max_lon, max_lat = viewbox
+        params["viewbox"] = f"{min_lon},{max_lat},{max_lon},{min_lat}"
+        params["bounded"] = 1
+    r = _session.get("https://nominatim.openstreetmap.org/search", params=params, timeout=30)
+    if r.ok and r.json():
+        j = r.json()[0]
+        return float(j["lat"]), float(j["lon"])
+    return None
+
+
 _CHAIN = [("awesomeapi", _awesome), ("nominatim", _nominatim)]
 
 
@@ -96,5 +115,25 @@ class Geocoder:
             if sede is None:
                 raise ValueError(f"Sem coordenada para {key} e sem sede do município")
             return GeoHit(sede[0], sede[1], "sede_municipio", "baixa")
+        self.cache[key] = asdict(hit)
+        return hit
+
+    def geocode_bairro(self, key: str, consulta: str, sede: tuple, viewbox: tuple | None = None) -> GeoHit:
+        """Geocodifica um bairro pelo nome (sem CEP/endereço) — só os 5 bairros da capital em `locais.py`.
+
+        `viewbox` (do polígono do município) evita pegar homônimo em outro lugar do estado."""
+        if key in self.cache and self.cache[key]["fonte"] == "nominatim_texto":
+            return GeoHit(**self.cache[key])
+        hit = None
+        if not self.offline:
+            try:
+                res = _nominatim_texto(consulta, viewbox=viewbox)
+            except requests.RequestException as e:
+                log.warning("  nominatim_texto falhou para %s: %s", key, e)
+                res = None
+            if res:
+                hit = GeoHit(res[0], res[1], "nominatim_texto", "alta")
+        if hit is None:
+            hit = GeoHit(sede[0], sede[1], "sede_municipio", "baixa")
         self.cache[key] = asdict(hit)
         return hit

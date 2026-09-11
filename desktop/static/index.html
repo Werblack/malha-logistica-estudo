@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Malha Logística SP</title>
+<link rel="stylesheet" href="vendor/maplibre-gl.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <aside id="sidebar">
+    <h1>🗺️ Malha Logística SP</h1>
+    <p class="sub">Ógea × PagResolve (jul/26) · <span id="contagem-polos-sub">31</span> polos ativos (com técnico)</p>
+
+    <button id="btn-reset" class="btn-reset">↺ Resetar Parâmetros</button>
+
+    <div class="campo mestre">
+      <label for="raio_global">Raio Global <output id="raio_global_v"></output> km</label>
+      <input type="range" id="raio_global" min="0" max="150" step="1">
+      <small class="origem" id="raio_global_origem"></small>
+    </div>
+
+    <h2>Polos ativos (<span id="contagem-lista">31</span>)</h2>
+    <input type="search" id="busca_polo" placeholder="Filtrar polo...">
+    <div id="lista-polos"></div>
+
+    <h2>Produtividade e custo</h2>
+    <div class="campo">
+      <label for="os_dia_gsp">Capital / Grande SP <output id="os_dia_gsp_v"></output> OS/dia</label>
+      <input type="range" id="os_dia_gsp" min="2" max="40" step="0.5">
+    </div>
+    <div class="campo">
+      <label for="os_dia_interior">Interior <output id="os_dia_interior_v"></output> OS/dia</label>
+      <input type="range" id="os_dia_interior" min="1" max="40" step="0.5">
+    </div>
+    <div class="campo">
+      <label for="custo_tecnico">Custo por técnico novo <output id="custo_tecnico_v"></output></label>
+      <input type="range" id="custo_tecnico" min="0" max="30000" step="250">
+    </div>
+
+    <div id="legenda">
+      <div><span class="dot" style="background:#2E7D32"></span> Território Ógea</div>
+      <div><span class="dot" style="background:linear-gradient(90deg,#2E7D32,#FBC02D)"></span> Território misto (proporção real)</div>
+      <div><span class="dot" style="background:#FBC02D"></span> Território PagResolve</div>
+      <div><span class="dot" style="background:#c6c6c6"></span> Sem volume</div>
+      <div><span class="dot round" style="background:#1f4e8c"></span> Polo PagResolve</div>
+      <div><span class="dot round" style="background:#b3261e"></span> Armazém Ógea</div>
+    </div>
+  </aside>
+
+  <main>
+    <div id="kpis">
+      <div class="card">
+        <div class="rotulo">Volume absorvido</div>
+        <div class="valor" id="kpi-absorvido">-</div>
+        <div class="extra" id="kpi-locais"></div>
+      </div>
+      <div class="card">
+        <div class="rotulo">Share projetado</div>
+        <div class="valor" id="kpi-share">-</div>
+        <div class="extra" id="kpi-share-extra"></div>
+      </div>
+      <div class="card">
+        <div class="rotulo">Técnicos sugeridos</div>
+        <div class="valor" id="kpi-tec">-</div>
+        <div class="extra" id="kpi-tec-custo"></div>
+      </div>
+      <div class="card">
+        <div class="rotulo">Novo CMU médio</div>
+        <div class="valor" id="kpi-cmu">-</div>
+        <div class="extra" id="kpi-hoje"></div>
+      </div>
+    </div>
+
+    <div id="map-wrap">
+      <div id="map"></div>
+
+      <div id="controles-flutuantes">
+        <button id="btn-tooltip-flutuante" title="Ligar/desligar o tooltip que segue o cursor">🖱️ Tooltip Flutuante: Ativado</button>
+        <button id="btn-foco" title="Expandir mapa / Modo Foco">⛶ Expandir mapa</button>
+      </div>
+
+      <div id="tooltip-flutuante" hidden></div>
+
+      <div id="foco-mini" hidden>
+        <div id="foco-mini-cabecalho">
+          <b id="foco-mini-titulo">Raio Global</b>
+          <button id="foco-mini-voltar" hidden title="Voltar ao raio global">↺</button>
+        </div>
+        <label><output id="foco-mini-valor"></output> km</label>
+        <input type="range" id="foco-mini-slider" min="0" max="150" step="1">
+      </div>
+
+      <button id="btn-abrir-detalhe">📋 Visualizar Detalhe por Polo (<span id="contagem-detalhe">31</span>)</button>
+    </div>
+  </main>
+
+  <div id="drawer-overlay" hidden></div>
+  <div id="drawer-detalhe" hidden>
+    <div class="drawer-header">
+      <b>Detalhe por Polo</b>
+      <div class="drawer-acoes">
+        <button id="btn-exportar">⬇️ Exportar Cenário (.xlsx)</button>
+        <button id="btn-fechar-drawer" title="Fechar">✕</button>
+      </div>
+    </div>
+    <div id="export-status" hidden></div>
+    <div class="drawer-body">
+      <table id="tabela-polos">
+        <thead><tr>
+          <th>Polo</th><th>Região</th><th>Raio</th><th>Téc. hoje</th><th>Absorvido</th>
+          <th>Téc. novos</th><th>Volume cenário</th><th>CMU hoje</th><th>CMU novo</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="vendor/maplibre-gl.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
